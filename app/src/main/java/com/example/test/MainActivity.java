@@ -36,12 +36,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
 
 
-        int cnt = event.getPointerCount();
+        
         int eventaction = event.getAction() & MotionEvent.ACTION_MASK;
-        if (cnt == 3) {
+        if (event.getPointerCount() == 3) {
+            switch (eventaction){
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    update();
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + eventaction);
+            }
 
-            update();
-            cnt=0;
+
+
 
 
         }
