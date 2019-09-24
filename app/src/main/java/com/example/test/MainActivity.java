@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void update() {
         String FILENAME = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss'.txt'").format(new Date());
-        String Time = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss").format(new Date());
+        String Time = new SimpleDateFormat("HH:mm:ss").format(new Date());
         File rootPath = new File(Environment.getExternalStorageDirectory(), DNAME);
         if (!rootPath.exists()) {
 

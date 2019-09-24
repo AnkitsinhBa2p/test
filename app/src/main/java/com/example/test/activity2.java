@@ -28,19 +28,8 @@ public class activity2 extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         db = new dbhelper(this);
         allfiles.addAll(db.getAllData());
-//        String detail= "";
-//
-//        for(int i=0; i<allfiles.size();i++){
-//            files file=new files();
-//            file=allfiles.get(i);
-//            detail += "\n Name: " + file.getFname() + " time : " + file.getTime() + " \n";
-//
-//        }
-
-//            Log.d("Reading: ", "Reading all contacts..");
-//            allfiles = mdb.getAllData();
-            madapter = new fileAdapter(this,allfiles);
-            recyclerView.setAdapter(madapter);
+        madapter = new fileAdapter(this,allfiles);
+        recyclerView.setAdapter(madapter);
 
 
 
