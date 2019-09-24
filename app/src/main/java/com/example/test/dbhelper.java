@@ -40,30 +40,29 @@ public class dbhelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    //
     public ArrayList<files> getAllData() {
 
-        ArrayList<files> filesList = new ArrayList<files>();
+        ArrayList<files> filesList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
+
         if (cursor.moveToFirst()) {
             do {
                 files file = new files();
                 file.setId(Integer.parseInt(cursor.getString(0)));
                 file.setFname(cursor.getString(1));
                 file.setTime(cursor.getString(2));
-                // Adding contact to list
+
                 filesList.add(file);
 
             } while (cursor.moveToNext());
         }
         db.close();
-        // return contact list
+
         return filesList;
     }
 
