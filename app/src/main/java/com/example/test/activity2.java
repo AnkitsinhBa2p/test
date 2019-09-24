@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class activity2 extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private dbhelper mdb;
+    private dbhelper db;
     private ArrayList<files> allfiles=new ArrayList<>();
     private fileAdapter madapter;
 
@@ -24,16 +24,21 @@ public class activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_activity2);
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rec1);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
-        mdb = new dbhelper(this);
-        allfiles = mdb.getAllData();
+        db = new dbhelper(this);
+        allfiles.addAll(db.getAllData());
+//        String detail= "";
+//
+//        for(int i=0; i<allfiles.size();i++){
+//            files file=new files();
+//            file=allfiles.get(i);
+//            detail += "\n Name: " + file.getFname() + " time : " + file.getTime() + " \n";
+//
+//        }
 
-
-
-            Log.d("Reading: ", "Reading all contacts..");
-            allfiles = mdb.getAllData();
+//            Log.d("Reading: ", "Reading all contacts..");
+//            allfiles = mdb.getAllData();
             madapter = new fileAdapter(this,allfiles);
             recyclerView.setAdapter(madapter);
 

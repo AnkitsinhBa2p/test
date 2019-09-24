@@ -36,7 +36,7 @@ public class dbhelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, files.getFname());
         contentValues.put(COL_3, files.getTime());
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
 
@@ -53,7 +53,7 @@ public class dbhelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 files file = new files();
-                file.setId(Integer.parseInt(cursor.getString(0)));
+                file.setId(cursor.getInt(0));
                 file.setFname(cursor.getString(1));
                 file.setTime(cursor.getString(2));
 
