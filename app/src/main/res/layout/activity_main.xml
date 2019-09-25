@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:text="Long long string"
+        
         android:textSize="16dp"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
