@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class activity2 extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private  final String TAG = MainActivity.class.getSimpleName();
     private dbhelper db;
     private ArrayList<files> allfiles=new ArrayList<>();
     private fileAdapter madapter;
@@ -31,8 +31,21 @@ public class activity2 extends AppCompatActivity {
         madapter = new fileAdapter(this,allfiles);
         recyclerView.setAdapter(madapter);
 
+//        newdata();
+
+
+
 
 
 
     }
+
+//    private void newdata() {
+//        int currentSize = madapter.getItemCount();
+//        allfiles.add(new files("2","4"));
+//        allfiles.add(new files("3","5"));
+//        allfiles.add(new files("4","5"));
+//        allfiles.add(new files("5","6"));
+//        madapter.notifyItemRangeInserted(currentSize , allfiles.size() - currentSize);
+//    }
 }
