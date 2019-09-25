@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class activity2 extends AppCompatActivity {
 
@@ -18,6 +18,7 @@ public class activity2 extends AppCompatActivity {
     private dbhelper db;
     private ArrayList<files> allfiles=new ArrayList<>();
     private fileAdapter madapter;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class activity2 extends AppCompatActivity {
             Toolbar toolbar=findViewById(R.id.tool);
             setSupportActionBar(toolbar);
 
-            RecyclerView recyclerView = findViewById(R.id.rec1);
+            recyclerView = findViewById(R.id.rec1);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -50,10 +51,26 @@ public class activity2 extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sort_name:
-                Toast.makeText(this, "name sort", Toast.LENGTH_SHORT).show();
+
+                Collections.sort(allfiles, new Comparator<files>() {
+
+                    public int compare(files lhs, files rhs) {
+                        return lhs.getFname().compareTo(rhs.getFname());
+                    }
+                });
+                recyclerView.setAdapter(new fileAdapter(getApplicationContext(),allfiles));
+                new fileAdapter(getApplicationContext(),allfiles).notifyDataSetChanged();
                 return true;
+
             case R.id.sort_time:
-                Toast.makeText(this, "time sort", Toast.LENGTH_SHORT).show();
+                Collections.sort(allfiles, new Comparator<files>() {
+
+                    public int compare(files lhs, files rhs) {
+                        return lhs.getTime().compareTo(rhs.getTime());
+                    }
+                });
+                recyclerView.setAdapter(new fileAdapter(getApplicationContext(),allfiles));
+                new fileAdapter(getApplicationContext(),allfiles).notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
