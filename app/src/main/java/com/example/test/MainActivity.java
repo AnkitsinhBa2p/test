@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.io.FileOutputStream;
@@ -111,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             mOutput.getFD().sync();
             mOutput.close();
             db.insertData(new files(FILENAME, Time));
+
 
 
         } catch (IOException ex) {

@@ -3,8 +3,12 @@ package com.example.test;
 
 public class files {
     private int id;
-    private static String fname;
-    private static String time;
+    private String fname;
+    private String time;
+
+    public files() {
+
+    }
 
     public int getId() {
         return id;
@@ -14,23 +18,20 @@ public class files {
         this.id = id;
     }
 
-    public static String getFname() {
+    public  String getFname() {
         return fname;
     }
 
-    public static void setFname(String fname) {
-        files.fname = fname;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public static String getTime() {
+    public  String getTime() {
         return time;
     }
 
-    public static void setTime(String time) {
-        files.time = time;
-    }
-
-    public files() {
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public files(int id, String fname, String time) {
@@ -40,7 +41,6 @@ public class files {
     }
 
     public files(String fname, String time) {
-
         this.fname = fname;
         this.time = time;
     }

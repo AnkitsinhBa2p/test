@@ -13,8 +13,8 @@ public class dbhelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "files.db";
     private static final String TABLE_NAME = "file_table";
     private static final String COL_1 = "ID";
-    private static final String COL_2 = "NAME";
-    private static final String COL_3 = "TIME";
+    private final String COL_2 = "NAME";
+    private  final String COL_3 = "TIME";
 
     public dbhelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,51 +34,42 @@ public class dbhelper extends SQLiteOpenHelper {
     void insertData(files file) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, files.getFname());
-        contentValues.put(COL_3, files.getTime());
+        contentValues.put(COL_2, file.getFname());
+        contentValues.put(COL_3, file.getTime());
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
 
     public ArrayList<files> getAllData() {
 
+
         ArrayList<files> filesList = new ArrayList<>();
-        // Select All Query
+
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-
-        if (cursor.moveToFirst()) {
-            do {
+        if(cursor!=null && cursor.getCount()>0){
+            cursor.moveToFirst();
+            for (int i=0;i<cursor.getCount();i++){
                 files file = new files();
-                file.setId(cursor.getInt(0));
-                file.setFname(cursor.getString(1));
-                file.setTime(cursor.getString(2));
+                file.setId(cursor.getInt(cursor.getColumnIndex(COL_1)));
+                file.setFname(cursor.getString(cursor.getColumnIndex(COL_2)));
+                file.setTime(cursor.getString(cursor.getColumnIndex(COL_3)));
 
                 filesList.add(file);
-
-            } while (cursor.moveToNext());
+                cursor.moveToNext();
+            }
         }
+
+
         db.close();
 
         return filesList;
+
     }
 
-    public boolean updateData(String id, String name, String time) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1, id);
-        contentValues.put(COL_2, name);
-        contentValues.put(COL_3, time);
-        db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
-        return true;
-    }
 
-    public Integer deleteData(String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
-    }
 
 }
